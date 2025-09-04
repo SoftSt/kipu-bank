@@ -1,0 +1,300 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_bankCap",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_withdrawLimit",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "InsufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "MaxBankCapReached",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "WithdrawLimitExceeded",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ZeroAmountNotAllowed",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "DepositMade",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "WithdrawalMade",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "bankCap",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "depositCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "getVaultBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalDeposited",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawLimit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawalCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"author": "Jorge Andrés Jácome",
+			"details": "Sigue buenas prácticas de seguridad, incluye errores personalizados y eventos.",
+			"events": {
+				"DepositMade(address,uint256)": {
+					"params": {
+						"amount": "Monto depositado.",
+						"user": "Dirección del usuario que depositó."
+					}
+				},
+				"WithdrawalMade(address,uint256)": {
+					"params": {
+						"amount": "Monto retirado.",
+						"user": "Dirección del usuario que retiró."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"params": {
+						"_bankCap": "Límite global de depósitos.",
+						"_withdrawLimit": "Límite máximo de retiro por transacción."
+					}
+				},
+				"deposit()": {
+					"custom:external": "",
+					"details": "Sigue el patrón checks-effects-interactions."
+				},
+				"getVaultBalance(address)": {
+					"params": {
+						"user": "Dirección del usuario."
+					},
+					"returns": {
+						"_0": "balance del usuario."
+					}
+				},
+				"withdraw(uint256)": {
+					"custom:external": "",
+					"params": {
+						"amount": "Monto a retirar."
+					}
+				}
+			},
+			"title": "KipuBank - Una bóveda descentralizada con límites de depósito y retiro.",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"DepositMade(address,uint256)": {
+					"notice": "Se emite cuando un usuario realiza un depósito exitoso."
+				},
+				"WithdrawalMade(address,uint256)": {
+					"notice": "Se emite cuando un usuario retira fondos exitosamente."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"bankCap()": {
+					"notice": "Límite de depósito global."
+				},
+				"deposit()": {
+					"notice": "Permite depositar ETH a la bóveda personal del usuario."
+				},
+				"depositCount()": {
+					"notice": "Número de depósitos realizados."
+				},
+				"getVaultBalance(address)": {
+					"notice": "Devuelve el balance actual del usuario."
+				},
+				"totalDeposited()": {
+					"notice": "Monto total depositado en el banco."
+				},
+				"withdraw(uint256)": {
+					"notice": "Permite al usuario retirar una cantidad de su bóveda."
+				},
+				"withdrawLimit()": {
+					"notice": "Límite máximo por retiro."
+				},
+				"withdrawalCount()": {
+					"notice": "Número de retiros realizados."
+				}
+			},
+			"notice": "Permite a los usuarios depositar y retirar ETH con límites y seguridad.",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contract/KipuBank.sol": "KipuBank"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contract/KipuBank.sol": {
+			"keccak256": "0x0fa60326bae995a20adee7470113694c26b01d8be28421676ee94288bc9a8f44",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7de63ed262e934da3692f5c607b6c98b49c57fcf24822b1bc337b3e5914e81f4",
+				"dweb:/ipfs/QmWMRc7sWtEtejCQyCsMr6FK1m6oGya1SqXojNg3FL75Ee"
+			]
+		}
+	},
+	"version": 1
+}
